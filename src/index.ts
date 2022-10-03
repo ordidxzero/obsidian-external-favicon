@@ -1,9 +1,9 @@
-import { ItemView, Plugin, WorkspaceLeaf } from "obsidian";
-import { h, render, VNode } from "preact";
+import { ItemView, Plugin, WorkspaceLeaf } from 'obsidian';
+import { h, render, VNode } from 'preact';
 
-import DiceRoller from "./ui/DicerRoller.tsx";
+import DiceRoller from './ui/DicerRoller';
 
-const VIEW_TYPE = "react-view";
+const VIEW_TYPE = 'react-view';
 
 class MyReactView extends ItemView {
   private reactComponent: VNode;
@@ -13,11 +13,11 @@ class MyReactView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "Dice Roller";
+    return 'Dice Roller';
   }
 
   getIcon(): string {
-    return "calendar-with-checkmark";
+    return 'calendar-with-checkmark';
   }
 
   async onOpen(): Promise<void> {
@@ -32,10 +32,7 @@ export default class ReactStarterPlugin extends Plugin {
   private view: MyReactView;
 
   async onload(): Promise<void> {
-    this.registerView(
-      VIEW_TYPE,
-      (leaf: WorkspaceLeaf) => (this.view = new MyReactView(leaf))
-    );
+    this.registerView(VIEW_TYPE, (leaf: WorkspaceLeaf) => (this.view = new MyReactView(leaf)));
 
     this.app.workspace.onLayoutReady(this.onLayoutReady.bind(this));
   }

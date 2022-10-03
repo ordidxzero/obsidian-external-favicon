@@ -22,4 +22,4 @@ npm run build
 
 ## Stats
 
-The production output of this sample plugin is **~13 KB**.
+The production output of this sample plugin is **~35 KB**.
