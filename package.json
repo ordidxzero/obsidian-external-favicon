@@ -8,9 +8,9 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "fix": "prettier --write .",
-    "dev": "npm run lint && rollup -c",
+    "dev": "yarn lint && rollup -c",
     "build:nolint": "NODE_ENV=production rollup -c",
-    "build": "NODE_ENV=production npm run lint && rollup -c",
+    "build": "NODE_ENV=production yarn lint && rollup -c",
     "test": "jest",
     "test:watch": "yarn test -- --watch"
   },
