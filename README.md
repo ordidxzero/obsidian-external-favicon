@@ -1,25 +1,20 @@
-# obsidian-preact-starter
+# Obsidian External Favicon
 
-A starter template for creating an [Obsidian](https://obsidian.md/) plugin with [PreactJS](https://preactjs.com/).
+## Usage
 
-## Features
+You just need to install this plugin and you're all set! No further action is required to add a favicon to your anchor element.
 
-This project comes preconfigured with [Typescript](https://www.typescriptlang.org/), [Babel](https://babeljs.io/), and [Rollup.js](https://www.rollupjs.org).
+If a favicon doesn't exist, it will be replaced with a default image.
 
-yarn berry를 적용하였습니다.
+### **Before**
 
-## Getting Started
+![](https://user-images.githubusercontent.com/60772480/226513676-aea2a187-d42d-449b-96ca-f0879d04e96a.png)
 
-Click "use this template" to create your own fork of this repo. Make sure to reference [the official sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin) for information about how to get started with the Obsidian API and how to submit your plugin to the Community Plugin Gallery.
+### **After**
 
-```bash
-# for local development
-yarn dev
+![](https://user-images.githubusercontent.com/60772480/226513871-356ae468-e5bd-489f-87ca-2e3ab4e559e6.png)
 
-# for a production bundle
-yarn build
-```
+## Development Roadmap
 
-## Stats
-
-The production output of this sample plugin is **~35 KB**.
+- [ ] feature that manually set favicons by hostname
+- [ ] Custom Styling (`font-size`, `padding`, `hover` effect, etc ...)
