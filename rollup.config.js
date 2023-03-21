@@ -1,5 +1,5 @@
 import babel from '@rollup/plugin-babel';
-// import commonjs from '@rollup/plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { env } from 'process';
@@ -21,7 +21,7 @@ export default {
       'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
       preventAssignment: true,
     }),
-    // commonjs(),
+    commonjs(),
     babel({
       babelHelpers: 'bundled',
       extensions: ['.ts', '.tsx'],

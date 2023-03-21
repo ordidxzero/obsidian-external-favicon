@@ -1,48 +1,46 @@
-import { ItemView, Plugin, WorkspaceLeaf } from 'obsidian';
-import { h, render, VNode } from 'preact';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Plugin } from 'obsidian';
 
-import DiceRoller from './ui/DicerRoller';
+export default class ExternalLinkFaviconPlugin extends Plugin {
+  async onload() {
+    this.registerMarkdownPostProcessor(async element => {
+      const targetLinks = Array.from(element.querySelectorAll('a')).filter(el => el.classList.contains('external-link'));
+      for await (const link of targetLinks) {
+        const extFavLink = element.createEl('a');
+        extFavLink.classList.add('__external-favicon__container');
 
-const VIEW_TYPE = 'react-view';
+        const hostname = `${link.protocol}//${link.hostname}`;
 
-class MyReactView extends ItemView {
-  private reactComponent: VNode;
+        extFavLink.ariaLabel = hostname;
+        extFavLink.rel = 'noopener';
+        extFavLink.href = link.href;
+        extFavLink.target = '_blank';
 
-  getViewType(): string {
-    return VIEW_TYPE;
-  }
+        const text = element.createEl('span');
+        text.classList.add('__external-favicon__text');
+        text.innerHTML = link.innerHTML;
 
-  getDisplayText(): string {
-    return 'Dice Roller';
-  }
+        const faviconURL = `${hostname}/favicon.ico`;
 
-  getIcon(): string {
-    return 'calendar-with-checkmark';
-  }
+        const img = element.createEl('img');
+        img.classList.add('__external-favicon__img');
 
-  async onOpen(): Promise<void> {
-    this.reactComponent = h(DiceRoller, {});
+        img.src = faviconURL;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    render(this.reactComponent, (this as any).contentEl);
-  }
-}
+        img.onerror = () => {
+          img.src = 'https://user-images.githubusercontent.com/60772480/226511375-ea4dace8-49c6-4660-8b3f-8b37dec58eb6.png';
+        };
 
-export default class ReactStarterPlugin extends Plugin {
-  private view: MyReactView;
+        const imgContainer = element.createEl('div');
+        imgContainer.classList.add('__external-favicon__img-container');
 
-  async onload(): Promise<void> {
-    this.registerView(VIEW_TYPE, (leaf: WorkspaceLeaf) => (this.view = new MyReactView(leaf)));
-
-    this.app.workspace.onLayoutReady(this.onLayoutReady.bind(this));
-  }
-
-  onLayoutReady(): void {
-    if (this.app.workspace.getLeavesOfType(VIEW_TYPE).length) {
-      return;
-    }
-    this.app.workspace.getRightLeaf(false).setViewState({
-      type: VIEW_TYPE,
+        imgContainer.append(img);
+        extFavLink.append(imgContainer, text);
+        link.parentElement.style.display = 'inline-block';
+        link.replaceWith(extFavLink);
+        link.remove();
+      }
     });
   }
 }
