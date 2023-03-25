@@ -37,7 +37,7 @@ export default class ExternalLinkFaviconPlugin extends Plugin {
 
         imgContainer.append(img);
         extFavLink.append(imgContainer, text);
-        link.parentElement.style.display = 'inline-block';
+        // link.parentElement.style.display = 'inline-block';
         link.replaceWith(extFavLink);
         link.remove();
       }
