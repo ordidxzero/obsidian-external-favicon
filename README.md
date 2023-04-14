@@ -2,7 +2,9 @@
 
 ## Usage
 
-You just need to install this plugin and you're all set! No further action is required to add a favicon to your anchor element.
+1. Install this plugin.
+2. Turn on the plugin.
+3. Force reload the obsidian.
 
 If a favicon doesn't exist, it will be replaced with a default image.
 
